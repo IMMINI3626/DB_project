@@ -5,15 +5,14 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name      = trim($_POST['name'] ?? '');
+    $phone     = trim($_POST['phone'] ?? '');
     $email     = trim($_POST['email'] ?? '');
     $password  = $_POST['password'] ?? '';
-    $user_type = 'user'; // 기본 사용자 유형
+    $user_type = 'user';
 
-    // 필수 입력값 체크
-    if (empty($name) || empty($email) || empty($password)) {
+    if (empty($name) || empty($phone) || empty($email) || empty($password)) {
         $error = '모든 필드를 입력해주세요.';
     } else {
-        // 이메일 중복 체크
         $checkStmt = $conn->prepare("SELECT user_id FROM User WHERE email = ?");
         $checkStmt->bind_param("s", $email);
         $checkStmt->execute();
@@ -21,22 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result && $result->num_rows > 0) {
             $error = '이미 등록된 이메일입니다.';
-        } 
-        // 비밀번호 유효성 검사 추가
-        elseif (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/', $password)) {
+        } elseif (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/', $password)) {
             $error = '비밀번호 입력 방식을 다시 확인해주세요.';
-        } 
-    else {
-            // 비밀번호 해싱
+        } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // 회원 정보 DB에 저장
             $insertStmt = $conn->prepare(
-                "INSERT INTO User (name, email, password, user_type, created_at)
-                 VALUES (?, ?, ?, ?, NOW())"
+                "INSERT INTO User (name, phone, email, password, user_type, created_at)
+                 VALUES (?, ?, ?, ?, ?, NOW())"
             );
-            $insertStmt->bind_param("ssss", $name, $email, $hashedPassword, $user_type);
-            
+            $insertStmt->bind_param("sssss", $name, $phone, $email, $hashedPassword, $user_type);
+
             if ($insertStmt->execute()) {
                 $insertStmt->close();
                 header('Location: login.php');
@@ -53,26 +47,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/register.css">
     <meta charset="UTF-8">
     <title>회원가입</title>
 </head>
 <body>
+<div class="register-container">
     <h1>회원가입</h1>
     <?php if (!empty($error)): ?>
         <p style="color:red;"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
     <form method="post" action="">
-    이름: <input type="text" name="name" required><br>
-    이메일: <input type="email" name="email" required><br>
-    비밀번호: <input type="password" name="password" required><small style="color:gray;"> *비밀번호는 영문, 숫자, 특수문자를 포함한 8~16자여야 합니다.</small><br><br>
-
-    
-    <button type="submit">회원가입</button>     
-    <a href="main.html">
-        <button type="button">메인으로 돌아가기</button>
-    </a>
-</form>
-    
+        <input type="text" name="name" placeholder="이름을 입력하세요" required><br>
+        <input type="email" name="email" placeholder="이메일을 입력하세요" required><br>
+        <input type="text" name="phone" placeholder="전화번호를 입력하세요" required><br>
+        <input type="password" name="password" placeholder="비밀번호를 입력하세요" required><br>
+        <small class="password-info">＊비밀번호는 영문, 숫자, 특수문자를 포함한 8~16자여야 합니다.</small><br>
+        <button type="submit">회원가입</button>
+    </form>
+    <hr>
+    <p>
+        <a href="login.php"><button>로그인 하러가기</button></a>
+        <a href="main.php"><button>메인으로 돌아가기</button></a>
+    </p>
+</div>
 </body>
 </html>

@@ -1,0 +1,120 @@
+/* room_list.css */
+
+body {
+  font-family: 'Noto Sans KR', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e9f0f4;
+  color: #333;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+/* 검색 폼 */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+form label {
+  font-weight: 600;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  flex: 1 1 120px;
+  padding: 8px 10px;
+  border: 1.5px solid #b0bec5;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus {
+  border-color: #4db6ac;
+  outline: none;
+}
+
+form button {
+  padding: 10px 20px;
+  background-color: #4db6ac;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+form button:hover {
+  background-color: #009688;
+}
+
+/* 리스트 스타일 */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  background-color: white;
+  padding: 18px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+ul li strong {
+  font-size: 1.25rem;
+  color: #00796b;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* 상세보기 링크 */
+a {
+  color: #4db6ac;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #009688;
+  text-decoration: underline;
+}
+
+/* 메인 돌아가기 버튼 */
+p {
+  margin-top: 40px;
+  text-align: center;
+}
+
+p button {
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  background-color: #4db6ac;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+p button:hover {
+  background-color: #009688;
+}

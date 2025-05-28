@@ -33,7 +33,7 @@ $result = $stmt->get_result();
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/room_list.css">
     <meta charset="UTF-8">
     <title>자취방 목록</title>
 </head>
@@ -65,7 +65,7 @@ $result = $stmt->get_result();
 <?php endif; ?>
 
 <p>
-    <a href="main.html">
+    <a href="main.php">
     <button type="button">메인으로 돌아가기</button>
     </a>
 </p>

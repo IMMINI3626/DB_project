@@ -16,7 +16,7 @@ $result = $conn->query("SELECT * FROM Room ORDER BY created_at DESC");
 <?php while ($row = $result->fetch_assoc()): ?>
     <li>
         <strong><?php echo htmlspecialchars($row['room_name']); ?></strong>
-        (<?php echo htmlspecialchars($row['location']); ?>, <?php echo $row['price']; ?>원)
+        (<?php echo htmlspecialchars($row['location']); ?> / <?php echo number_format($row['price']); ?>원)
         <a href="room_detail.php?room_id=<?php echo $row['room_id']; ?>">보기</a>
         <a href="room_edit.php?room_id=<?php echo $row['room_id']; ?>">수정</a>
         <a href="room_delete.php?room_id=<?php echo $row['room_id']; ?>" onclick="return confirm('삭제하시겠습니까?');">삭제</a>

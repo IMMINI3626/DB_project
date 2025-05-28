@@ -2,14 +2,14 @@
 session_start();
 include 'db.php';
 
+$error = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
         $error = '이메일과 비밀번호를 모두 입력해주세요.';
-    } elseif (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/', $password)) {
-        $error = '비밀번호는 영문, 숫자, 특수문자를 포함한 8~16자여야 합니다.';
     } else {
         $stmt = $conn->prepare("SELECT * FROM User WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -19,12 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows === 1) {
             $User = $result->fetch_assoc();
 
-            if (password_verify($password, $User['password'])) {
+            // 평문 비밀번호 비교 + 해시 비밀번호 비교
+            if ($User['password'] === $password || password_verify($password, $User['password'])) {
                 $_SESSION['user_id'] = $User['user_id'];
                 $_SESSION['user_name'] = $User['name'];
                 $_SESSION['user_type'] = $User['user_type'];
 
-                header('Location: main.html');
+                header('Location: main.php');
                 exit;
             } else {
                 $error = '비밀번호가 일치하지 않습니다.';
@@ -41,24 +42,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
     <meta charset="UTF-8">
     <title>로그인</title>
 </head>
 <body>
-<h1>로그인</h1>
-<?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
-<form method="post" action="">
-    이메일: <input type="email" name="email" required><br>
-    비밀번호: <input type="password" name="password" required><br>
-    <button type="submit">로그인</button>
-</form>
-
-<hr>
-<p>
-    <a href="register.php"><button>회원가입 하러가기</button></a>
-    <a href="main.html"><button>메인으로 돌아가기</button></a>
-</p>
-
+<div class="info-text">
+    <p>관리자 로그인은 <a href="admin_passcheck.php">여기</a>를 클릭하세요.</p>
+</div>
+<div class="login-container">
+    <h1>로그인</h1>
+    <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <form method="post" action="">
+        <input type="email" name="email" placeholder="이메일을 입력하세요" required><br>
+        <input type="password" name="password" placeholder="비밀번호를 입력하세요" required><br>
+        <button type="submit">로그인</button>
+    </form>
+    <hr>
+    <p>
+        <a href="main.php"><button>메인으로 돌아가기</button></a>
+    </p>
+    <div class="row-text">
+    <p>아직 회원이 아니신가요? <a href="register.php">회원가입</a></p>
+    <p>비밀번호를 잊으셨나요? <a href="reset_password.php">비밀번호 재설정</a></p>
+    </div>
+</div>
 </body>
 </html>

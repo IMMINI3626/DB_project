@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/Mypage.css">
     <meta charset="UTF-8">
     <title>마이페이지</title>
 </head>
@@ -18,14 +18,12 @@ if (!isset($_SESSION['user_id'])) {
 <p>안녕하세요, <?php echo htmlspecialchars($_SESSION['user_name'] ?? '사용자'); ?>님!</p>
 
 <ul>
-    <li><a href="my_bookmarks.php">내 북마크 목록</a></li>
-    <li><a href="my_reviews.php">내가 쓴 후기</a></li>
-    <li><a href="rooms_list.php">자취방 전체 목록</a></li>
-    <?php if ($_SESSION['user_type'] === 'admin'): ?>
-        <li><a href="admin_dashboard.php">📂 관리자 페이지로</a></li>
-    <?php endif; ?>
-    <li><a href="withdraw.php" style="color:red;">회원 탈퇴</a></li>
-    <li><a href="logout.php">로그아웃</a></li>
+    <a href="my_bookmarks.php"><button>내 북마크 목록</button></a>
+    <a href="my_reviews.php"><button>내가 쓴 후기</button></a>
+    <a href="rooms_list.php"><button>자취방 전체 목록</button></a>
+    <a href="logout.php"><button>로그아웃</button></a>
+    <a href="main.php"><button>메인으로 돌아가기</button></a>
+    <a href="withdraw.php" style="color:red;"><button>회원 탈퇴</button></a>
 </ul>
 </body>
 </html>
