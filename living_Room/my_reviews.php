@@ -24,29 +24,34 @@ $result = $stmt->get_result();
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="css/main.css">
     <meta charset="UTF-8">
     <title>내 후기 목록</title>
+    <link rel="stylesheet" href="css/my_option.css">
 </head>
 <body>
-<h1>내가 작성한 후기</h1>
-<?php if ($result->num_rows > 0): ?>
-    <ul>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <li>
-            <strong><?php echo htmlspecialchars($row['room_name']); ?></strong><br>
-            평점: <?php echo $row['rating']; ?>/5<br>
-            작성일: <?php echo $row['created_at']; ?><br>
-            내용:<br>
-            <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
-            <a href="room_detail.php?room_id=<?php echo $row['room_id']; ?>">방 보러가기</a>
-        </li><br>
-    <?php endwhile; ?>
-    </ul>
-<?php else: ?>
-    <p>작성한 후기가 없습니다.</p>
-<?php endif; ?>
+<div class="container">
+    <h1>내가 작성한 후기</h1>
 
-<a href="rooms_list.php">← 자취방 목록으로</a>
+    <div class="link-bar">
+        <a class="back-link" href="rooms_list.php">← 자취방 목록으로</a>
+        <a class="back-link" href="mypage.php">← 마이페이지로</a>
+    </div>
+
+    <?php if ($result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="room-box">
+                <p><strong><?php echo htmlspecialchars($row['room_name']); ?></strong></p>
+                <p>평점: <?php echo $row['rating']; ?>/5</p>
+                <p>작성일: <?php echo $row['created_at']; ?></p>
+                <p>내용:</p>
+                <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
+                <p><a href="room_detail.php?room_id=<?php echo $row['room_id']; ?>">방 보러가기</a></p>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>작성한 후기가 없습니다.</p>
+    <?php endif; ?>
+
+</div>
 </body>
 </html>

@@ -1,0 +1,65 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f0f4f8;
+  color: #2c3e50;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.room-box {
+  border: 4px solid #d4e2eb;
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  background-color: #fbfcfd;
+  border-radius: 8px;
+}
+
+.room-box p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.room-box a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.room-box a:hover {
+  text-decoration: underline;
+}
+
+.back-link {
+  display: block; 
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  text-decoration: none;
+  margin-bottom: 2px;
+
+}
+
+
+.link-bar {
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+
+.back-link:hover {
+  text-decoration: underline;
+}

@@ -2,8 +2,11 @@
 session_start();
 include 'db.php';
 
+header('Content-Type: application/json');
+
 if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die('잘못된 접근입니다.');
+    echo json_encode(['status' => 'fail', 'message' => 'Unauthorized']);
+    exit;
 }
 
 $user_id = $_SESSION['user_id'];
@@ -12,7 +15,8 @@ $rating = (int)($_POST['rating'] ?? 0);
 $content = trim($_POST['content'] ?? '');
 
 if ($room_id <= 0 || $rating < 1 || $rating > 5 || $content === '') {
-    die('입력 값 오류');
+    echo json_encode(['status' => 'fail', 'message' => 'Invalid input']);
+    exit;
 }
 
 $stmt = $conn->prepare("INSERT INTO Review (user_id, room_id, rating, content, created_at)
@@ -22,5 +26,4 @@ $stmt->bind_param("iiis", $user_id, $room_id, $rating, $content);
 $stmt->execute();
 $stmt->close();
 
-header("Location: room_detail.php?room_id=$room_id");
-exit;
+echo json_encode(['status' => 'success', 'message' => 'Review submitted']);

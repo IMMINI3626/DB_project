@@ -19,6 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <ul>
     <a href="my_bookmarks.php"><button>내 북마크 목록</button></a>
+    <a href="my_likes.php"><button>내 좋아요 목록</button></a>
     <a href="my_reviews.php"><button>내가 쓴 후기</button></a>
     <a href="rooms_list.php"><button>자취방 전체 목록</button></a>
     <a href="logout.php"><button>로그아웃</button></a>

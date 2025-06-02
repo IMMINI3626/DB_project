@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,10 +10,14 @@
   <div class="container">
     <h1>대학생 자취방 정보 관리 시스템</h1>
     <ul class="nav-menu">
-      <li><a href="register.php">회원가입</a></li>
-      <li><a href="login.php">로그인</a></li>
+      <?php if (isset($_SESSION['user_id'])): ?>
+        <li><a href="mypage.php">마이페이지</a></li>
+        <li><a href="logout.php">로그아웃</a></li>
+      <?php else: ?>
+        <li><a href="register.php">회원가입</a></li>
+        <li><a href="login.php">로그인</a></li>
+      <?php endif; ?>
       <li><a href="rooms_list.php">자취방 목록 보기</a></li>
-      <li><a href="mypage.php">마이페이지</a></li>
     </ul>
   </div>
 </body>

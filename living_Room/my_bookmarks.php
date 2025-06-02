@@ -24,29 +24,33 @@ $result = $stmt->get_result();
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="css/main.css">
     <meta charset="UTF-8">
     <title>내 북마크 목록</title>
+    <link rel="stylesheet" href="css/my_option.css">
 </head>
 <body>
-<h1>내가 북마크한 자취방</h1>
-<?php if ($result->num_rows > 0): ?>
-    <ul>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <li>
-            <strong><?php echo htmlspecialchars($row['room_name']); ?></strong><br>
-            위치: <?php echo htmlspecialchars($row['location']); ?><br>
-            가격: <?php echo htmlspecialchars($row['price']); ?> 원<br>
-            평수: <?php echo htmlspecialchars($row['size']); ?> 평<br>
-            등록일: <?php echo htmlspecialchars($row['created_at']); ?><br>
-            <a href="room_detail.php?room_id=<?php echo $row['room_id']; ?>">상세 보기</a>
-        </li><br>
-    <?php endwhile; ?>
-    </ul>
-<?php else: ?>
-    <p>북마크한 자취방이 없습니다.</p>
-<?php endif; ?>
+<div class="container">
+    <h1>내가 북마크한 자취방</h1>
 
-<a href="rooms_list.php">← 자취방 목록으로</a>
+    <div class="link-bar">
+        <a class="back-link" href="rooms_list.php">← 자취방 목록으로</a>
+        <a class="back-link" href="mypage.php">← 마이페이지로</a>
+    </div>
+
+    <?php if ($result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="room-box">
+                <p><strong><?php echo htmlspecialchars($row['room_name']); ?></strong></p>
+                <p>위치: <?php echo htmlspecialchars($row['location']); ?></p>
+                <p>가격: <?php echo number_format($row['price']); ?> 원</p>
+                <p>평수: <?php echo htmlspecialchars($row['size']); ?> 평</p>
+                <p>등록일: <?php echo htmlspecialchars($row['created_at']); ?></p>
+                <p><a href="room_detail.php?room_id=<?php echo $row['room_id']; ?>">상세 보기</a></p>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>북마크한 자취방이 없습니다.</p>
+    <?php endif; ?>
+</div>
 </body>
 </html>
