@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <hr>
     <p>
-        <a href="register.php"><button>회원가입 하러가기</button></a>
+        <a href="join_user.php"><button>회원가입 하러가기</button></a>
         <a href="main.php"><button>메인으로 돌아가기</button></a>
     </p>
 </div>

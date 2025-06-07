@@ -1,0 +1,73 @@
+/* join_user.css - 회원가입 페이지 전용 스타일 */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f9fc;
+  color: #374151;
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.join_user-container {
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.join_user-container h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #c7dbe6;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #6bc1c9;
+  outline: none;
+  box-shadow: 0 0 5px rgba(107, 193, 201, 0.5);
+}
+
+button {
+  background-color: #6bc1c9;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background-color: #429ea6;
+  box-shadow: 0 6px 12px rgba(66, 158, 166, 0.4);
+}
+.password-info {
+  font-size: 0.85rem;
+  color: #999999;      /* 연한 회색 */
+  margin-top: -0.5rem; /* input과 텍스트 간 간격 조절 */
+  margin-bottom: 1rem;
+  display: block;
+  text-align: left;
+  padding-left: 5px;
+  user-select: none;   /* 텍스트 선택 방지 (선택 가능하게 하려면 삭제해도 됨) */
+}

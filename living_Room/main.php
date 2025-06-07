@@ -14,7 +14,7 @@
         <li><a href="mypage.php">마이페이지</a></li>
         <li><a href="logout.php">로그아웃</a></li>
       <?php else: ?>
-        <li><a href="register.php">회원가입</a></li>
+        <li><a href="join_user.php">회원가입</a></li>
         <li><a href="login.php">로그인</a></li>
       <?php endif; ?>
       <li><a href="rooms_list.php">자취방 목록 보기</a></li>

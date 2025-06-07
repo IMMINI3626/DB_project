@@ -19,8 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows === 1) {
             $User = $result->fetch_assoc();
 
-            // 평문 비밀번호 비교 + 해시 비밀번호 비교
-            if ($User['password'] === $password || password_verify($password, $User['password'])) {
+            // 관리자는 로그인 차단
+            if ($User['user_type'] === 'admin') {
+                $error = '관리자는 이 페이지에서 로그인할 수 없습니다.';
+            }
+            // 일반 사용자만 로그인 허용
+            else if ($User['password'] === $password || password_verify($password, $User['password'])) {
                 $_SESSION['user_id'] = $User['user_id'];
                 $_SESSION['user_name'] = $User['name'];
                 $_SESSION['user_type'] = $User['user_type'];
@@ -33,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $error = '해당 이메일로 등록된 사용자가 없습니다.';
         }
-
         $stmt->close();
     }
 }
@@ -63,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="main.php"><button>메인으로 돌아가기</button></a>
     </p>
     <div class="row-text">
-    <p>아직 회원이 아니신가요? <a href="register.php">회원가입</a></p>
+    <p>아직 회원이 아니신가요? <a href="join_user.php">회원가입</a></p>
     <p>비밀번호를 잊으셨나요? <a href="reset_password.php">비밀번호 재설정</a></p>
     </div>
 </div>
